@@ -4,6 +4,11 @@ import scipy
 import socket
 import subprocess
 import time
+import qiskit
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister
+from qiskit import execute
+import qiskit.quantum_info as qi
+from qiskit_aer import AerSimulator
 
 
 def get_free_port():
