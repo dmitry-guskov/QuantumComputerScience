@@ -64,3 +64,16 @@ def get_circuit_length(circuit):
     else:
         raise ValueError("Unknown circuit type")
     return program_length
+
+
+def my_kron(mats):
+    ans = np.kron(mats[-2],mats[-1])
+    for i in range(len(mats)-2,0,-1):
+        ans = np.kron(mats[i],ans)
+    return ans
+def get_gap(H):
+    eigh = np.linalg.eigvals(H)
+    gap = eigh[-1] - eigh[-2]
+    print(gap,eigh)
+    return gap
+
