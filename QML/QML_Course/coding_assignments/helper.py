@@ -86,7 +86,7 @@ def get_gap(H):
 
 # def pauli_z(qubit_index, coeff, n_qubits):
 #     eye = np.eye((n_qubits)) # the i^th row of the identity matrix is the correct parameter for \sigma_i 
-#     return qi.SparsePauliOp(Pauli(( eye[qubit_index], np.zeros(n_qubits))), coeff)
+    # return qi.SparsePauliOp(Pauli(( eye[qubit_index], np.zeros(n_qubits))), coeff)
 
 # def product_pauli_z(q1, q2, coeff, n_qubits):
 #     eye = np.eye((n_qubits))
@@ -172,3 +172,26 @@ def get_gap(H):
 #                    [temperature_0, temperature_1, temperature_2])
 
 
+
+# from qiskit_aer import Aer
+# from qiskit.algorithms.minimum_eigensolvers import QAOA
+# from qiskit.algorithms.optimizers import COBYLA
+# from qiskit_aer.primitives import Sampler as AerSampler
+
+# p = 1
+
+# # qaoa = QAOA(ising_model, optimizer, p, operator_mode='matrix')
+
+# sampler = AerSampler(backend_options={"method": "statevector"},
+#                     run_options={"shots": 100, "seed": 42}
+#                                                             )
+# optimizer = COBYLA()
+# qaoa = QAOA(sampler, optimizer, reps=p)
+
+# result = qaoa.compute_minimum_eigenvalue(ising_model)
+# print(result)
+# # backend = get_aer_backend('statevector_simulator')
+# # quantum_instance = QuantumInstance(backend, shots=100)
+# # result = qaoa.run(quantum_instance)
+# result.eigenstate
+qi.Pauli.to
