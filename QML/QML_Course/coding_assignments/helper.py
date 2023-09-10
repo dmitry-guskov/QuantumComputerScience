@@ -194,4 +194,134 @@ def get_gap(H):
 # # quantum_instance = QuantumInstance(backend, shots=100)
 # # result = qaoa.run(quantum_instance)
 # result.eigenstate
-qi.Pauli.to
+# qi.Pauli.to
+
+
+
+
+# from sklearn.linear_model import Perceptron
+# model_1 = Perceptron(max_iter=1000, tol=1e-3)
+# model_1.fit(X_train, y_train)
+# print('accuracy (train): %5.2f'%(metric(y_train, model_1.predict(X_train))))
+# print('accuracy (test): %5.2f'%(metric(y_test, model_1.predict(X_test))))
+# from sklearn.svm import SVC
+# model_2 = SVC(kernel='rbf', gamma='auto')
+# model_2.fit(X_train, y_train)
+# print('accuracy (train): %5.2f'%(metric(y_train, model_2.predict(X_train))))
+# print('accuracy (test): %5.2f'%(metric(y_test, model_2.predict(X_test))))
+# from sklearn.ensemble import AdaBoostClassifier
+# model_3 = AdaBoostClassifier(n_estimators=3)
+# model_3.fit(X_train, y_train)
+# print('accuracy (train): %5.2f'%(metric(y_train, model_3.predict(X_train))))
+# print('accuracy (test): %5.2f'%(metric(y_test, model_3.predict(X_test))))
+# models = [model_3, model_2, model_1]
+# n_models = len(models)
+# predictions = np.array([h.predict(X_train) for h in models], dtype=np.float64)
+# λ = 1
+# q = predictions @ predictions.T/(n_models ** 2)
+
+# qii = len(X_train) / (n_models ** 2) + λ - 2 * predictions @ y_train/(n_models)
+
+# q[np.diag_indices_from(q)] = qii
+# Q = {}
+# for i in range(n_models):
+#     for j in range(i, n_models):
+#         Q[(i, j)] = q[i, j]
+# Q
+# import dimod
+# sampler = dimod.SimulatedAnnealingSampler()
+# response = sampler.sample_qubo(Q, num_reads=10)
+# weights = list(response.first.sample.values())
+# def predict(models, weights, X):
+
+#     n_data = len(X)
+#     T = 0
+#     y = np.zeros(n_data)
+#     for i, h in enumerate(models):
+#         y0 = weights[i] * h.predict(X)  # prediction of weak classifier
+#         y += y0
+#         T += np.sum(y0)
+#     # print(T / (n_data*len(models)))
+#     # print(y)
+#     # TODO: why do we need this term?
+#     y = np.sign(y - T / (n_data*len(models)))
+
+#     return y
+# print('accuracy (train): %5.2f'%(metric(y_train, predict(models, weights, X_train))))
+# print('accuracy (test): %5.2f'%(metric(y_test, predict(models, weights, X_test))))
+# weights
+# h, J, offset = dimod.qubo_to_ising(Q)
+# h,J,offset
+# from qiskit.quantum_info import Pauli
+# import qiskit.quantum_info as qi
+# num_nodes = q.shape[0]
+# pauli_list = []
+# coef_list = []
+
+# wp = np.zeros(num_nodes)
+# for i in range(num_nodes):
+#     vp = np.zeros(num_nodes)
+#     vp[i] = 1
+#     pauli_list.append(Pauli((vp, wp)))
+#     coef_list.append(h[i])
+#     for j in range(i+1, num_nodes):
+#         if q[i, j] != 0:
+#             vp = np.zeros(num_nodes)
+#             vp[i] = 1
+#             vp[j] = 1
+#             pauli_list.append(Pauli((vp, wp)))
+#             coef_list.append(-J[i,j])  # minus here to fix issues 
+# ising_model = qi.SparsePauliOp(pauli_list,np.array(coef_list))
+# ising_model
+# # pauli_list
+# from qiskit_aer import Aer
+# from qiskit.algorithms.minimum_eigensolvers import QAOA
+# from qiskit.algorithms.optimizers import COBYLA
+# from qiskit_aer.primitives import Sampler as AerSampler
+
+# p = 1
+
+# # qaoa = QAOA(ising_model, optimizer, p, operator_mode='matrix')
+
+# sampler = AerSampler(backend_options={"method": "statevector"},
+#                     run_options={"shots": 100, "seed": 42}
+#                                                             )
+# optimizer = COBYLA()
+# qaoa = QAOA(sampler, optimizer, reps=p)
+
+# result = qaoa.compute_minimum_eigenvalue(ising_model)
+# print(result)
+# # backend = get_aer_backend('statevector_simulator')
+# # quantum_instance = QuantumInstance(backend, shots=100)
+# # result = qaoa.run(quantum_instance)
+# # weights = [ 1-int(a) for a in result.best_measurement['bitstring']][::-1]
+# weights = [int(a) for a in result.best_measurement['bitstring']]
+
+# # k = np.argmax(result['eigvecs'][0])
+# # k = np.argmax(result.eigenstate)
+# # k
+# # weights = np.zeros(num_nodes)
+# # for i in range(num_nodes):
+# #     weights[i] = k % 2
+# #     k >>= 1
+# weights
+# print('accuracy (train): %5.2f'%(metric(y_train, predict(models, weights, X_train))))
+# print('accuracy (test): %5.2f'%(metric(y_test, predict(models, weights, X_test))))
+
+
+
+
+
+
+############################ instead ################    https://qiskit.org/documentation/stable/0.28/aqua_tutorials/Qiskit%20Algorithms%20Migration%20Guide.html
+# from qiskit.aqua import get_aer_backend, QuantumInstance
+# from qiskit.aqua.algorithms import QAOA
+# from qiskit.aqua.components.optimizers import COBYLA
+# from qiskit.aqua.translators.ising import max_cut
+
+
+#from qiskit import Aer
+# from qiskit.utils import QuantumInstance
+# from qiskit.algorithms import QAOA
+# from qiskit.algorithms.optimizers import COBYLA
+# qiskit.optimization.applications.ising.max_cut
