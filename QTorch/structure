@@ -1,0 +1,31 @@
+qaoa_project/
+├── README.md
+├── setup.py
+├── requirements.txt
+├── qaoa/
+│   ├── __init__.py
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── qaoa.py
+│   │   ├── layer.py
+│   ├── layers/
+│   │   ├── __init__.py
+│   │   ├── mixer_layer.py
+│   │   ├── cost_layer.py
+│   │   ├── noise_layer.py
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── utilities.py
+├── examples/
+│   ├── __init__.py
+│   ├── example1.py
+│   ├── example2.py
+├── tests/
+│   ├── __init__.py
+│   ├── test_qaoa.py
+│   ├── test_layers.py
+└── docs/
+    ├── __init__.py
+    ├── index.md
+    ├── usage.md
+    ├── api_reference.md
